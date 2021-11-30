@@ -24,6 +24,14 @@ RUN groupadd --gid $GID $USERNAME \
 # swap to non-root user
 USER $USERNAME
 WORKDIR /home/$USERNAME
+ENV WS_PATH=/home/guest/iw_ws
 
 # auto source ros stuff
 RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
+# lazy
+RUN rosdep update
+RUN echo 'test -f $WS_PATH/devel/setup.bash && source $WS_PATH/devel/setup.bash' >> ~/.bashrc
+RUN sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+#RUN curl -sSL 'http://keyserver.ubuntu.com/pks/lookupop=get&search=0xC1CF6E31E6BADE8868B172B4F42ED6FBAB17C654' | sudo apt-key add -
+RUN sudo apt update
+RUN echo 'cd $WS_PATH && rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -r -y --os=ubuntu:bionic' >> ~/.bashrc
