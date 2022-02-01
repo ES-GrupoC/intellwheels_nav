@@ -29,4 +29,16 @@
 #include <pcl/point_types.h>
 #include <sensor_msgs/PointCloud2.h>
 
+#include <iostream>
+
+#include <pcl/common/common_headers.h>
+#include <pcl/features/normal_3d.h>
+#include <pcl/console/parse.h>
+#include <pcl/ModelCoefficients.h>
+#include <pcl/sample_consensus/method_types.h>
+#include <pcl/sample_consensus/model_types.h>
+#include <pcl/segmentation/sac_segmentation.h>
+#include <pcl/visualization/cloud_viewer.h>
+#include <pcl/io/io.h>
+
 #endif // OBSTACLE_WARN_H
