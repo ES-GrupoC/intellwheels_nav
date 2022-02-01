@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
+set(CMAKE_CXX_STANDARD 17)
 project(ES_intellwheels)
 
 ## Find catkin macros and libraries
@@ -174,6 +175,28 @@ set_target_properties(obstacle_warn PROPERTIES OUTPUT_NAME obstacle_warn PREFIX 
 add_dependencies(obstacle_warn ${${PROJECT_NAME}_EXPORTED_TAGETS} ${catkin_EXPORTED_TARGETS})
 
 target_link_libraries(obstacle_warn
+    ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} ${PCL_LIBRARIES}
+)
+
+##calibration
+add_executable(calibration src/calibration.cpp)
+
+set_target_properties(calibration PROPERTIES OUTPUT_NAME calibration PREFIX "")
+
+add_dependencies(calibration ${${PROJECT_NAME}_EXPORTED_TAGETS} ${catkin_EXPORTED_TARGETS})
+
+target_link_libraries(calibration
+    ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} ${PCL_LIBRARIES}
+)
+
+##plane_params
+add_executable(plane_params src/plane_params.cpp)
+
+set_target_properties(plane_params PROPERTIES OUTPUT_NAME plane_params PREFIX "")
+
+add_dependencies(plane_params ${${PROJECT_NAME}_EXPORTED_TAGETS} ${catkin_EXPORTED_TARGETS})
+
+target_link_libraries(plane_params
     ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} ${PCL_LIBRARIES}
 )
 
