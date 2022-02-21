@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<launch>
+        <node pkg="es_intellwheels" type="obstacle_warn" name="obstacle_warn" output="screen">
+                <!--INCLINADO-->
+                <!--
+		<param name="plane_a" type="double" value="-0.056794737" />
+		<param name="plane_b" type="double" value="-0.942573684" />
+		<param name="plane_c" type="double" value="0.328961579" />
+		<param name="plane_d" type="double" value="-0.587768421" />
+		<param name="min_dist" type="double" value="0.1" />
+                -->
+                <!--VERTICAL-->
+                <param name="plane_a" type="double" value="0" />
+                <param name="plane_b" type="double" value="-1" />
+                <param name="plane_c" type="double" value="0" />
+                <param name="plane_d" type="double" value="0.5" />
+                <param name="min_dist" type="double" value="0.1" />
+        </node>
+</launch>

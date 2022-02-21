@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0.2)
 set(CMAKE_CXX_STANDARD 17)
-project(ES_intellwheels)
+project(es_intellwheels)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -178,14 +178,14 @@ target_link_libraries(obstacle_warn
     ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} ${PCL_LIBRARIES}
 )
 
-##calibration
-add_executable(calibration src/calibration.cpp)
+##aquisicao imagem e point cloud
+add_executable(img_pc_acquisition src/img_pc_acquisition.cpp)
 
-set_target_properties(calibration PROPERTIES OUTPUT_NAME calibration PREFIX "")
+set_target_properties(img_pc_acquisition PROPERTIES OUTPUT_NAME img_pc_acquisition PREFIX "")
 
-add_dependencies(calibration ${${PROJECT_NAME}_EXPORTED_TAGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(img_pc_acquisition ${${PROJECT_NAME}_EXPORTED_TAGETS} ${catkin_EXPORTED_TARGETS})
 
-target_link_libraries(calibration
+target_link_libraries(img_pc_acquisition
     ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} ${PCL_LIBRARIES}
 )
 
@@ -197,6 +197,17 @@ set_target_properties(plane_params PROPERTIES OUTPUT_NAME plane_params PREFIX ""
 add_dependencies(plane_params ${${PROJECT_NAME}_EXPORTED_TAGETS} ${catkin_EXPORTED_TARGETS})
 
 target_link_libraries(plane_params
+    ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} ${PCL_LIBRARIES}
+)
+
+##transformacao para frame na vertical
+add_executable(pc_frame_transform src/pc_frame_transform.cpp)
+
+set_target_properties(pc_frame_transform PROPERTIES OUTPUT_NAME pc_frame_transform PREFIX "")
+
+add_dependencies(pc_frame_transform ${${PROJECT_NAME}_EXPORTED_TAGETS} ${catkin_EXPORTED_TARGETS})
+
+target_link_libraries(pc_frame_transform
     ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} ${PCL_LIBRARIES}
 )
 
