@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+        <node pkg="es_intellwheels" type="sub_node.py" name="sub_node" output="screen">
+        </node>
+</launch>
