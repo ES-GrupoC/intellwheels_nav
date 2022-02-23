@@ -11,7 +11,6 @@ find_package(catkin REQUIRED COMPONENTS
   cv_bridge
   image_transport
   tf
-  gazebo_msgs
   tf2_msgs
   pcl_conversions
   pcl_ros
@@ -115,7 +114,7 @@ catkin_package(
     INCLUDE_DIRS include
     DEPENDS PCL
 #    LIBRARIES msg2tf
-    CATKIN_DEPENDS roscpp nav_msgs sensor_msgs tf gazebo_msgs pcl_conversions pcl_ros
+    CATKIN_DEPENDS roscpp nav_msgs sensor_msgs tf pcl_conversions pcl_ros
 #    DEPENDS
 )
 
@@ -168,13 +167,24 @@ link_directories(
 # )
 
 ##obstacle_warn
-add_executable(obstacle_warn src/obstacle_warn.cpp)
+add_executable(obstacle_warn_left src/obstacle_warn_left.cpp)
 
-set_target_properties(obstacle_warn PROPERTIES OUTPUT_NAME obstacle_warn PREFIX "")
+set_target_properties(obstacle_warn_left PROPERTIES OUTPUT_NAME obstacle_warn_left PREFIX "")
 
-add_dependencies(obstacle_warn ${${PROJECT_NAME}_EXPORTED_TAGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(obstacle_warn_left ${${PROJECT_NAME}_EXPORTED_TAGETS} ${catkin_EXPORTED_TARGETS})
 
-target_link_libraries(obstacle_warn
+target_link_libraries(obstacle_warn_left
+    ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} ${PCL_LIBRARIES}
+)
+
+##obstacle_warn
+add_executable(obstacle_warn_right src/obstacle_warn_right.cpp)
+
+set_target_properties(obstacle_warn_right PROPERTIES OUTPUT_NAME obstacle_warn_right PREFIX "")
+
+add_dependencies(obstacle_warn_right ${${PROJECT_NAME}_EXPORTED_TAGETS} ${catkin_EXPORTED_TARGETS})
+
+target_link_libraries(obstacle_warn_right
     ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} ${PCL_LIBRARIES}
 )
 

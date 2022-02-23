@@ -30,7 +30,7 @@ void closest_point(const sensor_msgs::PointCloud2ConstPtr &cloud_msg)
 
         Point = zed_cloud.points[i];
 
-        if(Point.x < 0.5f && Point.x > 0.35f && Point.z < 0.02f && Point.z > -0.5f)
+        if(Point.x < 0.5f && Point.x > 0.4f && Point.z < 0.02f && Point.z > -0.5f)
         {
             double distance = std::abs(floor_plane.a*Point.x + floor_plane.b*Point.y + floor_plane.c*Point.z + floor_plane.d)/
                               std::sqrt(floor_plane.a*floor_plane.a + floor_plane.b*floor_plane.b + floor_plane.c*floor_plane.c);
@@ -46,7 +46,7 @@ void closest_point(const sensor_msgs::PointCloud2ConstPtr &cloud_msg)
                     std_msgs::String warning_str;
                     std::stringstream ss;
 
-                    ss << "OBSTACULO\n" << Point.x << "\n" << Point.y << "\n" << Point.z;
+                    ss << "OBSTACULO\n" << Point.x << "\n" << Point.y << "\n" << Point.z << "\n";
                     warning_str.data = ss.str();
 
                     std::cout << ss.str();
@@ -61,11 +61,11 @@ void closest_point(const sensor_msgs::PointCloud2ConstPtr &cloud_msg)
 
 int main(int argc, char **argv)
 {
-    ros::init(argc, argv, "obstacle_warn");
+    ros::init(argc, argv, "obstacle_warn_right");
     ros::NodeHandle nh;
     ros::NodeHandle n_private("~");
 
-    ros::Subscriber sub = nh.subscribe<sensor_msgs::PointCloud2>("/zed2/zed_node_left/point_cloud/cloud_registered", 1, closest_point);
+    ros::Subscriber sub = nh.subscribe<sensor_msgs::PointCloud2>("/zed2/zed_node_right/point_cloud/cloud_registered", 1, closest_point);
 
     n_private.getParam("plane_a", floor_plane.a);
     n_private.getParam("plane_b", floor_plane.b);

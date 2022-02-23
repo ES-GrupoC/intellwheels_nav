@@ -4,7 +4,8 @@
 	<group ns="jeeves">
 		<!-- map server -->
 		<node name="map_server" pkg="map_server" type="map_server" args="$(arg pkg)/worlds/lab.yaml" clear_params="true" output="screen">
-			<param name="frame_id" value="jeeves/map_nn0"/>
+			<!--<param name="frame_id" value="jeeves/map_nn0"/>-->
+			<param name="map" value="/zed2/zed_node/mapping/fused_cloud"/>
 		</node>
 
 		<!-- navigation -->
