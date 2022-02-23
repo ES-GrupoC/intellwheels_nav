@@ -12,6 +12,7 @@ struct plane{
 
 plane floor_plane;
 double min_dist;
+int num_points;
 
 void closest_point(const sensor_msgs::PointCloud2ConstPtr &cloud_msg)
 {
@@ -37,21 +38,25 @@ void closest_point(const sensor_msgs::PointCloud2ConstPtr &cloud_msg)
 
             //std::cout << distance << "\n";
 
+            //std::cout << "min dist: " << num_points << "\n";
             if (distance > min_dist)
             {
                 count++;
 
-                if (count >= 10)
+                if (count >= num_points)
                 {
-                    std_msgs::String warning_str;
+                    //std_msgs::String warning_str;
                     std::stringstream ss;
 
                     ss << "OBSTACULO\n" << Point.x << "\n" << Point.y << "\n" << Point.z << "\n";
-                    warning_str.data = ss.str();
+                    //warning_str.data = ss.str();
 
                     std::cout << ss.str();
 
-                    warn_pub.publish(warning_str);
+                    std_msgs::Bool warn_bool;
+                    warn_bool.data = true;
+
+                    warn_pub.publish(warn_bool);
                     return;
                 }
             }
@@ -72,13 +77,14 @@ int main(int argc, char **argv)
     n_private.getParam("plane_c", floor_plane.c);
     n_private.getParam("plane_c", floor_plane.d);
     n_private.getParam("min_dist", min_dist);
+    n_private.getParam("num_points", num_points);
     /*n_private.param<double>("plane_a", floor_plane.a); //-0.056794737
     n_private.param<double>("plane_b", floor_plane.b, -0.942573684);
     n_private.param<double>("plane_c", floor_plane.c, 0.328961579);
     n_private.param<double>("plane_d", floor_plane.d, -0.587768421);
     n_private.param<double>("min_dist", min_dist, 0.1);
     */
-    warn_pub = nh.advertise<std_msgs::String>("/warning", 1);
+    warn_pub = nh.advertise<std_msgs::Bool>("/warning", 1);
 
     ros::spin();
 }

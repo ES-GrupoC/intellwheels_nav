@@ -15,6 +15,7 @@
 #include <geometry_msgs/PointStamped.h>
 #include <string.h>
 #include <std_msgs/String.h>
+#include <std_msgs/Bool.h>
 
 #include <sensor_msgs/CompressedImage.h>
 #include <sensor_msgs/CameraInfo.h>

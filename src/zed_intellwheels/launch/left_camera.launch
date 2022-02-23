@@ -24,12 +24,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <arg name="node_name_1"          default="zed_node_left" />
     <arg name="camera_model_1"       default="zed2" />
 
-    <arg name="camera_name_1"        default="zed2" />
+    <arg name="camera_name_1"        default="zed_left" />
 
     <arg name="base_frame"           default="camera_center" /> 
 
     <arg name="cam_pos_x_1"             default="0.0" /> <!-- Position respect to base frame (i.e. "base_link) -->
-    <arg name="cam_pos_y_1"             default="0.3" /> <!-- Position respect to base frame (i.e. "base_link) -->
+    <arg name="cam_pos_y_1"             default="0.2675" /> <!-- Position respect to base frame (i.e. "base_link) -->
     <arg name="cam_pos_z_1"             default="0.0" /> <!-- Position respect to base frame (i.e. "base_link) -->
     <arg name="cam_roll_1"              default="-1.57079633" /> <!-- Orientation respect to base frame (i.e. "base_link) -->
     <arg name="cam_pitch_1"             default="0.0" /> <!-- Orientation respect to base frame (i.e. "base_link) -->
